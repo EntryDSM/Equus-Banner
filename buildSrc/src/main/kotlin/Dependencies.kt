@@ -37,4 +37,5 @@ object Dependencies {
     // open feign
     const val OPEN_FEIGN = "org.springframework.cloud:spring-cloud-starter-openfeign:${DependencyVersions.OPEN_FEIGN_VERSION}"
 
+    const val AWS = "com.amazonaws:aws-java-sdk-s3:${DependencyVersions.AWS}"
 }

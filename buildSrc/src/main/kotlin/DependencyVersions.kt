@@ -5,4 +5,5 @@ object DependencyVersions {
     const val JSON_VERSION = "20200518"
     const val SENTRY_VERSION = "6.2.1"
     const val OPEN_FEIGN_VERSION = "3.1.4"
+    const val AWS = "1.12.281"
 }

@@ -58,6 +58,8 @@ dependencies {
 	// Feign Client
 	implementation(Dependencies.OPEN_FEIGN)
 
+	implementation(Dependencies.AWS)
+
 }
 
 tasks.withType<KotlinCompile> {
