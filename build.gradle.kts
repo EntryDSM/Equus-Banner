@@ -55,6 +55,9 @@ dependencies {
 	// Logging
 	implementation(Dependencies.SENTRY)
 
+	// Feign Client
+	implementation(Dependencies.OPEN_FEIGN)
+
 }
 
 tasks.withType<KotlinCompile> {

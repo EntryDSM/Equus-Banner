@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-validation:2.7.16-SNAPSHOT" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.boot" artifactId="spring-boot-starter-validation" version="2.7.16-SNAPSHOT" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.7.16-SNAPSHOT/48498ce2404191c5daf4134f4ad58aa00f609098/spring-boot-starter-validation-2.7.16-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-validation/2.7.16-SNAPSHOT/24888d5c7a10e18360e596793a790004d726361d/spring-boot-starter-validation-2.7.16-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

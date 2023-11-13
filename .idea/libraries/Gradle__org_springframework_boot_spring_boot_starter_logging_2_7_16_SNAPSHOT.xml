@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-logging:2.7.16-SNAPSHOT" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.boot" artifactId="spring-boot-starter-logging" version="2.7.16-SNAPSHOT" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/2.7.16-SNAPSHOT/bf0d9b940b14f36844538348390cf3855d50cecc/spring-boot-starter-logging-2.7.16-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/2.7.16-SNAPSHOT/c82b59d37be8a1ba4f73b7333df82bd390364c2c/spring-boot-starter-logging-2.7.16-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
