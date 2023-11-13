@@ -1,0 +1,1 @@
+/Users/dokyung/Desktop/project/Equus-Feed/buildSrc/build/classes/kotlin/main/Dependencies.class:/Users/dokyung/Desktop/project/Equus-Feed/buildSrc/build/classes/kotlin/main/DependencyVersions.class:/Users/dokyung/Desktop/project/Equus-Feed/buildSrc/build/classes/kotlin/main/PluginVersions.class
