@@ -52,6 +52,9 @@ dependencies {
 	// Cloud Config
 	implementation(Dependencies.CLOUD_CONFIG)
 
+	// Logging
+	implementation(Dependencies.SENTRY)
+
 }
 
 tasks.withType<KotlinCompile> {

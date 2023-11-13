@@ -22,6 +22,9 @@ object Dependencies {
     // json
     const val JSON = "org.json:json:${DependencyVersions.JSON_VERSION}"
 
+    // sentry
+    const val SENTRY = "io.sentry:sentry-spring-boot-starter:${DependencyVersions.SENTRY_VERSION}"
+
     // security
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
 
