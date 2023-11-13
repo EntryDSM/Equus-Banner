@@ -1,6 +1,7 @@
 package hs.kr.equus.banner.infrastructure.fegin.client.model
 
 import hs.kr.equus.banner.banner.global.security.jwt.UserRole
+import hs.kr.equus.banner.global.security.jwt.UserRole
 import java.util.*
 
 data class User(
