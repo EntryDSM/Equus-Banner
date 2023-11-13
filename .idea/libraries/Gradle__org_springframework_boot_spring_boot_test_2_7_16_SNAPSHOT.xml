@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-test:2.7.16-SNAPSHOT" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.boot" artifactId="spring-boot-test" version="2.7.16-SNAPSHOT" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-test/2.7.16-SNAPSHOT/16ebcf64647ed70af8005a0c29ad62e73c6a9219/spring-boot-test-2.7.16-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-test/2.7.16-SNAPSHOT/b0a6e12c8dfc868f92e0b49e14cde92f7bc10165/spring-boot-test-2.7.16-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
