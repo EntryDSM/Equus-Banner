@@ -13,5 +13,10 @@ enum class ErrorCode(
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
     // Not Found
-    BANNER_NOT_FOUND(404, "Banner Not Found")
+    BANNER_NOT_FOUND(404, "Banner Not Found"),
+    IMAGE_NOT_FOUND(404, "Image Not Found"),
+
+    //Bad Request
+    FILE_IS_EMPTY(400, "File does not exist"),
+    BAD_FILE_EXTENSION(400, "File Extension is invalid")
 }
