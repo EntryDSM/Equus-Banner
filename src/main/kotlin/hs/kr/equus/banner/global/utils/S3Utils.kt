@@ -5,7 +5,7 @@ import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.*
 import com.amazonaws.util.IOUtils
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
-import hs.kr.equus.banner.global.exception.FileIsEmptyException
+import hs.kr.equus.banner.global.exception.EmptyFileException
 import hs.kr.equus.banner.global.exception.ImageNotFoundException
 import org.imgscalr.Scalr
 import org.springframework.beans.factory.annotation.Value
@@ -98,7 +98,7 @@ class S3Utils(
         srcImg = try {
             ImageIO.read(file.inputStream)
         } catch (e: IOException) {
-            throw FileIsEmptyException
+            throw EmptyFileException
         }
 
         val dw = 300
@@ -126,14 +126,14 @@ class S3Utils(
         try {
             srcImg = ImageIO.read(file.inputStream)
         } catch (e : IOException) {
-            throw FileIsEmptyException
+            throw EmptyFileException
         }
         return srcImg
     }
 
 
     private fun verificationFile(file : MultipartFile?): String {
-        if(file == null || file.isEmpty || file.originalFilename == null) throw FileIsEmptyException
+        if(file == null || file.isEmpty || file.originalFilename == null) throw EmptyFileException
 
         val originalFilename = file.originalFilename!!
         val ext = originalFilename.substring(originalFilename.lastIndexOf(".") + 1)
