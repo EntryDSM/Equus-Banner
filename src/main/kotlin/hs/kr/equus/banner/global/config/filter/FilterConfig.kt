@@ -1,8 +1,8 @@
 package hs.kr.equus.banner.global.config.filter
 
-import hs.kr.equus.banner.banner.global.error.GlobalExceptionFilter
-import hs.kr.equus.banner.banner.global.security.jwt.JwtFilter
 import com.fasterxml.jackson.databind.ObjectMapper
+import hs.kr.equus.banner.global.error.GlobalExceptionFilter
+import hs.kr.equus.banner.global.security.jwt.JwtFilter
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.DefaultSecurityFilterChain

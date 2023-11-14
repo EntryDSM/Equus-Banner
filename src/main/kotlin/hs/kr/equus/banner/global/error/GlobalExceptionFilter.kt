@@ -1,8 +1,8 @@
 package hs.kr.equus.banner.global.error
 
-import hs.kr.equus.banner.banner.global.error.exception.EquusException
-import hs.kr.equus.banner.banner.global.error.exception.ErrorCode
 import com.fasterxml.jackson.databind.ObjectMapper
+import hs.kr.equus.banner.global.error.exception.EquusException
+import hs.kr.equus.banner.global.error.exception.ErrorCode
 import org.springframework.http.MediaType
 import io.sentry.Sentry
 import org.springframework.web.filter.OncePerRequestFilter
