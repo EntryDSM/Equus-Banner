@@ -10,6 +10,6 @@ class Banner (
     id : UUID? = null,
 
     @Column(name = "banner", nullable = false)
-    val banner : String
+    val link : String
     
 ) : BaseUUIDEntity(id)
