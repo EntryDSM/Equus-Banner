@@ -50,11 +50,11 @@ class S3Utils(
         }
         val inStream: InputStream = ByteArrayInputStream(os.toByteArray())
         val metadata = ObjectMetadata()
-        metadata.apply {
-            contentType = MediaType.IMAGE_PNG_VALUE
-            contentLength = os.size().toLong()
-            contentDisposition = "inline"
-        }
+            .apply {
+                contentType = MediaType.IMAGE_PNG_VALUE
+                contentLength = os.size().toLong()
+                contentDisposition = "inline"
+            }
         amazonS3Client.putObject(
             PutObjectRequest(bucketName, path + filename, inStream, metadata)
                 .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
