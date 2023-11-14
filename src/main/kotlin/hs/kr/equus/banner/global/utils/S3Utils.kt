@@ -43,12 +43,15 @@ class S3Utils(
         val outputImage: BufferedImage
         val os = ByteArrayOutputStream()
         outputImage = makeThumbnail(file!!)
-        try {
-            ImageIO.write(outputImage, "png", os)
-        } catch (e: IOException) {
-            throw ImageNotFoundException
+        val inStream: InputStream = ByteArrayOutputStream().run { // apply를 사용하려면 변수 타입을 변경해야함
+            try {
+                ImageIO.write(outputImage, "png", this)
+            } catch (e: IOException) {
+                throw ImageNotFoundException
+            }
+
+            ByteArrayInputStream(toByteArray())
         }
-        val inStream: InputStream = ByteArrayInputStream(os.toByteArray())
         val metadata = ObjectMetadata()
             .apply {
                 contentType = MediaType.IMAGE_PNG_VALUE
