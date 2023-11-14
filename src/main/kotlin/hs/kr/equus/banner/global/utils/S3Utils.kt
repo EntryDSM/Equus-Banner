@@ -1,6 +1,7 @@
 package hs.kr.equus.banner.global.utils
 
 import com.amazonaws.HttpMethod
+import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.*
 import com.amazonaws.util.IOUtils
@@ -23,13 +24,11 @@ import javax.imageio.ImageIO
 
 @Component
 class S3Utils(
-    private val amazonS3Client: AmazonS3Client,
+    private val amazonS3: AmazonS3,
 
-    @Value("\${aws.s3.bucket}")
+    @Value("\${spring.cloud.aws.s3.bucket}")
     private val bucketName: String,
 
-    @Value("\${aws.s3.base-image-url}")
-    private val baseImageUrl: String
 ) {
     companion object {
         private val EXP_TIME: Int = 1000 * 60 * 2
@@ -55,7 +54,7 @@ class S3Utils(
             contentLength = os.size().toLong()
             contentDisposition = "inline"
         }
-        amazonS3Client.putObject(
+        amazonS3.putObject(
             PutObjectRequest(bucketName, path + filename, inStream, metadata)
                 .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
         )
@@ -66,8 +65,8 @@ class S3Utils(
         val expiration = Date().apply {
             time = time + EXP_TIME.toLong()
         }
-        val url: URL = amazonS3Client.generatePresignedUrl(
-            GeneratePresignedUrlRequest(baseImageUrl, fileName)
+        val url: URL = amazonS3.generatePresignedUrl(
+            GeneratePresignedUrlRequest("", fileName)
                 .withMethod(HttpMethod.GET)
                 .withExpiration(expiration)
         )
@@ -76,7 +75,7 @@ class S3Utils(
 
     fun getObject(fileName: String, path: String): ByteArray {
         try {
-            val s3Object: S3Object = amazonS3Client.getObject(bucketName, "$path$fileName")
+            val s3Object: S3Object = amazonS3.getObject(bucketName, "$path$fileName")
             return IOUtils.toByteArray(s3Object.objectContent)
         } catch (e: RuntimeException) {
             throw ImageNotFoundException
@@ -84,7 +83,7 @@ class S3Utils(
     }
 
     fun delete(objectName: String, path: String) {
-        amazonS3Client.deleteObject(bucketName, objectName + path)
+        amazonS3.deleteObject(bucketName, objectName + path)
     }
 
     private fun makeThumbnail(file: MultipartFile): BufferedImage {
