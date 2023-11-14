@@ -2,14 +2,12 @@ package hs.kr.equus.banner.domain.banner.domain
 
 import hs.kr.equus.banner.domain.banner.BaseUUIDEntity
 import java.util.UUID
-import javax.persistence.Column
-import javax.persistence.Entity
+import org.springframework.data.redis.core.RedisHash
 
-@Entity(name = "tbl_banner")
+@RedisHash
 class BannerLink (
     id : UUID? = null,
 
-    @Column(name = "banner", nullable = false)
     val link : String
     
 ) : BaseUUIDEntity(id)
