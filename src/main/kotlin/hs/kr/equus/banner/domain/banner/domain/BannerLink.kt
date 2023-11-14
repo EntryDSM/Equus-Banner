@@ -6,10 +6,10 @@ import javax.persistence.Column
 import javax.persistence.Entity
 
 @Entity(name = "tbl_banner")
-class Banner (
+class BannerLink (
     id : UUID? = null,
 
     @Column(name = "banner", nullable = false)
-    val banner : String
+    val link : String
     
 ) : BaseUUIDEntity(id)
