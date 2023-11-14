@@ -60,6 +60,7 @@ dependencies {
 
 	implementation(Dependencies.AWS)
 
+	implementation(Dependencies.SCALR)
 }
 
 tasks.withType<KotlinCompile> {

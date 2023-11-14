@@ -37,5 +37,9 @@ object Dependencies {
     // open feign
     const val OPEN_FEIGN = "org.springframework.cloud:spring-cloud-starter-openfeign:${DependencyVersions.OPEN_FEIGN_VERSION}"
 
+    //aws
     const val AWS = "com.amazonaws:aws-java-sdk-s3:${DependencyVersions.AWS}"
+
+    //scalr
+    const val SCALR = "org.imgscalr:imgscalr-lib:${DependencyVersions.SCALR}"
 }
