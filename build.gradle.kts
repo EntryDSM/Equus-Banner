@@ -61,6 +61,8 @@ dependencies {
 	implementation(Dependencies.AWS)
 
 	implementation(Dependencies.SCALR)
+
+	implementation(Dependencies.REDIS)
 }
 
 tasks.withType<KotlinCompile> {

@@ -42,4 +42,7 @@ object Dependencies {
 
     //scalr
     const val SCALR = "org.imgscalr:imgscalr-lib:${DependencyVersions.SCALR}"
+
+    //redis
+    const val REDIS = "org.springframework.boot:spring-boot-starter-data-redis"
 }
