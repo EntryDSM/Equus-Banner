@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash
 @RedisHash
 class BannerLink (
     @Id
-    val id : UUID? = null,
+    var id : UUID? = null,
 
     val link : String
     
