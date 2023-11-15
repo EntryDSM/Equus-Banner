@@ -29,9 +29,6 @@ repositories {
 }
 
 dependencies {
-	// Database
-	implementation(Dependencies.SPRING_DATA_JPA)
-	runtimeOnly(Dependencies.MYSQL_CONNECTOR)
 
 	// Web
 	implementation(Dependencies.SPRING_WEB)
@@ -61,6 +58,8 @@ dependencies {
 	implementation(Dependencies.AWS)
 
 	implementation(Dependencies.SCALR)
+
+	implementation(Dependencies.REDIS)
 }
 
 tasks.withType<KotlinCompile> {
