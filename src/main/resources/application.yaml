@@ -5,11 +5,5 @@
         import: "optional:configserver:${CLOUD_CONFIG_IMPORT_URL}"
       cloud:
         config:
-          name: ${CONFIG_NAME}
-          profile: ${CONFIG_PROFILE}
-
-
-    servlet:
-      multipart:
-        max-file-size: 10MB
-        max-request-size: 10MB
+          name: banner
+          profile: local-dokyung
