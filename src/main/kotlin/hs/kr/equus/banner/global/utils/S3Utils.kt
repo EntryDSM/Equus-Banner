@@ -72,11 +72,6 @@ class S3Utils(
         return url.toString()
     }
 
-
-    fun delete(objectName: String, path: String) {
-        amazonS3.deleteObject(bucketName, "$path$objectName")
-    }
-
     private fun makeThumbnail(file: MultipartFile): BufferedImage {
         val srcImg: BufferedImage
         try {
