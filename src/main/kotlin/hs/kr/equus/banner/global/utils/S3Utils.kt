@@ -30,7 +30,7 @@ class S3Utils(
         private const val EXP_TIME = 1000 * 60 * 2
     }
 
-    fun upload(file: MultipartFile, path: String): String {
+    fun upload(file: MultipartFile): String {
         val ext = verificationFile(file)
 
         val randomName = UUID.randomUUID().toString()
@@ -53,7 +53,7 @@ class S3Utils(
         }
 
         amazonS3.putObject(
-            PutObjectRequest(bucketName, "$path$filename", inputStream, metadata)
+            PutObjectRequest(bucketName, filename, inputStream, metadata)
             .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
         )
 
