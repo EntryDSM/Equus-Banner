@@ -1,6 +1,7 @@
 package hs.kr.equus.banner.domain.banner.service
 
 import hs.kr.equus.banner.domain.banner.domain.repository.BannerLinkRepository
+import hs.kr.equus.banner.domain.banner.exception.BannerNotFoundException
 import hs.kr.equus.banner.global.utils.S3Utils
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -14,9 +15,9 @@ class UpdateBannerLinkService(
 ) {
     @Transactional
     fun execute(file: MultipartFile, id: Long): String {
-        val bannerLink = bannerLinkRepository.findByIdOrNull(id)
+        val bannerLink = bannerLinkRepository.findById(id).orElseThrow {BannerNotFoundException}
         val fileName = s3Utils.upload(file)
-        bannerLink?.update(link = fileName)
+        bannerLink.update(fileName)
         return s3Utils.upload(file)
     }
 }
