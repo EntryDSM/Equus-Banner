@@ -8,6 +8,10 @@ class BannerLink (
     @Id
     var id : Long? = null,
 
-    val link : String
+    var link : String
     
-)
+) {
+    fun update(link: String) {
+        this.link = link
+    }
+}
