@@ -18,6 +18,6 @@ class UpdateBannerLinkService(
         val bannerLink = bannerLinkRepository.findById(id).orElseThrow {BannerNotFoundException}
         val fileName = s3Utils.upload(file)
         bannerLink.update(fileName)
-        return s3Utils.upload(file)
+        return fileName
     }
 }
