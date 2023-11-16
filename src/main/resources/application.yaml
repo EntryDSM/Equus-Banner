@@ -12,3 +12,12 @@
         multipart:
           max-file-size: 10MB
           max-request-size: 10MB
+          
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: health, refresh, busrefresh
+          base-path: /
+          path-mapping:
+            health: /
