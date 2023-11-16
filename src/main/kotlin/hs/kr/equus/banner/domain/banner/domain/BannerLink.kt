@@ -10,10 +10,10 @@ class BannerLink (
     var id : Long? = null,
 
     @Indexed
-    var link : String
+    var fileName : String
     
 ) {
     fun update(link: String) {
-        this.link = link
+        this.fileName = link
     }
 }
