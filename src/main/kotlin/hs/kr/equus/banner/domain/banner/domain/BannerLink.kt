@@ -13,7 +13,8 @@ class BannerLink (
     var fileName : String
     
 ) {
-    fun update(link: String) {
-        this.fileName = link
+    fun update(fileName: String): String {
+        this.fileName = fileName
+        return fileName
     }
 }
