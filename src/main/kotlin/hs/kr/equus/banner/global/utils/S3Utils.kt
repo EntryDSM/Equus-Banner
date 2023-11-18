@@ -25,8 +25,6 @@ import javax.imageio.ImageIO
 class S3Utils(
     @Value("\${spring.cloud.aws.s3.bucket}")
     private val bucketName: String,
-    @Value("\${spring.cloud.aws.s3.baseUrl}")
-    private val baseImageUrl: String,
     private val amazonS3: AmazonS3
 ) {
     companion object {
@@ -63,19 +61,16 @@ class S3Utils(
         return filename
     }
 
-    fun generateObjectUrl(fileName: String?): String? {
-        if (fileName == null) return null
+    fun generateObjectUrl(fileName: String): String {
 
         val expiration = Date().apply {
-            time = time + EXP_TIME
+            time = time + EXP_TIME.toLong()
         }
-
-        val generatePresignedUrlRequest = GeneratePresignedUrlRequest(baseImageUrl, fileName)
-            .withMethod(HttpMethod.GET)
-            .withExpiration(expiration)
-
-        val url: URL = amazonS3.generatePresignedUrl(generatePresignedUrlRequest)
-
+        val url: URL = amazonS3.generatePresignedUrl(
+            GeneratePresignedUrlRequest(bucketName,fileName)
+                .withMethod(HttpMethod.GET)
+                .withExpiration(expiration)
+        )
         return url.toString()
     }
 
