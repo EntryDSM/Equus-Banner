@@ -25,7 +25,7 @@ import javax.imageio.ImageIO
 class S3Utils(
     @Value("\${spring.cloud.aws.s3.bucket}")
     private val bucketName: String,
-    @Value("\${spring.cloud.aws.s3.base-image-url}")
+    @Value("\${spring.cloud.aws.s3.baseUrl}")
     private val baseImageUrl: String,
     private val amazonS3: AmazonS3
 ) {
