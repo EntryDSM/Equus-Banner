@@ -20,10 +20,13 @@ import java.net.URL
 import java.util.*
 import javax.imageio.ImageIO
 
+
 @Component
 class S3Utils(
     @Value("\${spring.cloud.aws.s3.bucket}")
     private val bucketName: String,
+    @Value("\${spring.cloud.aws.s3.base-image-url}")
+    private val baseImageUrl: String,
     private val amazonS3: AmazonS3
 ) {
     companion object {
@@ -58,6 +61,22 @@ class S3Utils(
         )
 
         return filename
+    }
+
+    fun generateObjectUrl(fileName: String?): String? {
+        if (fileName == null) return null
+
+        val expiration = Date().apply {
+            time = time + EXP_TIME
+        }
+
+        val generatePresignedUrlRequest = GeneratePresignedUrlRequest(baseImageUrl, fileName)
+            .withMethod(HttpMethod.GET)
+            .withExpiration(expiration)
+
+        val url: URL = amazonS3.generatePresignedUrl(generatePresignedUrlRequest)
+
+        return url.toString()
     }
 
     private fun makeThumbnail(file: MultipartFile): BufferedImage {
