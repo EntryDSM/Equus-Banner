@@ -60,18 +60,6 @@ class S3Utils(
         return filename
     }
 
-    fun generateObjectUrl(fileName: String): String {
-        val expiration = Date().apply {
-            time = time + EXP_TIME.toLong()
-        }
-        val url: URL = amazonS3.generatePresignedUrl(
-            GeneratePresignedUrlRequest(bucketName, fileName)
-                .withMethod(HttpMethod.GET)
-                .withExpiration(expiration)
-        )
-        return url.toString()
-    }
-
     private fun makeThumbnail(file: MultipartFile): BufferedImage {
         val srcImg: BufferedImage
         try {
