@@ -3,7 +3,6 @@ package hs.kr.equus.banner.domain.banner.service
 import hs.kr.equus.banner.domain.banner.domain.BannerLink
 import hs.kr.equus.banner.domain.banner.domain.repository.BannerLinkRepository
 import hs.kr.equus.banner.global.utils.S3Utils
-import org.springframework.boot.Banner
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
@@ -15,7 +14,8 @@ class CreateBannerLinkService (
 ) {
     @Transactional
     fun execute(file : MultipartFile): String {
-        bannerLinkRepository.save(BannerLink(fileName = file.name))
-        return s3Utils.upload(file).url
+        val link = s3Utils.upload(file)
+        bannerLinkRepository.save(BannerLink(fileName = link.fileName))
+        return link.url
     }
 }
