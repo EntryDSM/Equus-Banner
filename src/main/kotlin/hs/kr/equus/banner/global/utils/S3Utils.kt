@@ -28,8 +28,8 @@ class S3Utils(
     private val amazonS3: AmazonS3,
 ) {
     companion object {
-        private val EXP_TIME = 1000 * 60 * 2
-        const val path: String = "photo/"
+        const val EXP_TIME = 1000 * 60 * 2
+        const val PATH: String = "photo/"
     }
 
     fun upload(file: MultipartFile): UploadBannerRequest {
@@ -56,7 +56,7 @@ class S3Utils(
 
         inputStream.use {
             amazonS3.putObject(
-                PutObjectRequest(bucketName, path+filename, it, metadata)
+                PutObjectRequest(bucketName, PATH+filename, it, metadata)
                     .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
             )
         }
@@ -72,7 +72,7 @@ class S3Utils(
         return amazonS3.generatePresignedUrl(
             GeneratePresignedUrlRequest(
                 bucketName,
-                "/${path}/${fileName}"
+                "/${PATH}/${fileName}"
             ).withMethod(HttpMethod.GET).withExpiration(expiration)
         ).toString()
     }
