@@ -16,7 +16,6 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.net.URL
 import java.util.*
 import javax.imageio.ImageIO
 
@@ -28,7 +27,7 @@ class S3Utils(
     private val amazonS3: AmazonS3
 ) {
     companion object {
-        private const val EXP_TIME = 1000 * 60 * 2
+        private val EXP_TIME = 1000 * 60 * 2
     }
 
     fun upload(file: MultipartFile): String {
@@ -53,25 +52,26 @@ class S3Utils(
             contentDisposition = "inline"
         }
 
-        amazonS3.putObject(
-            PutObjectRequest(bucketName, filename, inputStream, metadata)
-            .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
-        )
+        inputStream.use {
+            amazonS3.putObject(
+                PutObjectRequest(bucketName, filename, it, metadata)
+                    .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
+            )
+        }
 
-        return filename
+        return generateObjectUrl(filename)
     }
 
     fun generateObjectUrl(fileName: String): String {
-
-        val expiration = Date().apply {
-            time = time + EXP_TIME.toLong()
-        }
-        val url: URL = amazonS3.generatePresignedUrl(
-            GeneratePresignedUrlRequest(bucketName,fileName)
-                .withMethod(HttpMethod.GET)
-                .withExpiration(expiration)
+    val expiration = Date().apply {
+        time = time+ EXP_TIME.toLong()
+    }
+        val generatePresignedUrlRequest = GeneratePresignedUrlRequest(
+            bucketName, fileName
         )
-        return url.toString()
+            .withMethod(HttpMethod.GET)
+            .withExpiration(expiration)
+        return amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString()
     }
 
     private fun makeThumbnail(file: MultipartFile): BufferedImage {
