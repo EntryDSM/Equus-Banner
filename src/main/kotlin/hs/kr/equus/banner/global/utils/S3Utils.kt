@@ -3,7 +3,7 @@ package hs.kr.equus.banner.global.utils
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
-import hs.kr.equus.banner.domain.banner.presentation.request.UploadBannerRequest
+import hs.kr.equus.banner.domain.banner.presentation.dto.request.UploadBannerRequest
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
 import hs.kr.equus.banner.global.exception.EmptyFileException
 import hs.kr.equus.banner.global.exception.ImageNotFoundException

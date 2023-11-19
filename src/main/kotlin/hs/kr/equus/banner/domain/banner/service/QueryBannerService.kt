@@ -12,10 +12,10 @@ class QueryBannerService(
     private val s3Utils: S3Utils
 ) {
     @Transactional(readOnly = true)
-    fun execute(): List<QueryBannerResponse> {
+    fun execute(): List<String> {
         val banner = bannerLinkRepository.findAll()
         return banner.map {
-            bannerLink -> QueryBannerResponse(s3Utils.generateObjectUrl(bannerLink.fileName))
+            bannerLink -> s3Utils.generateObjectUrl(bannerLink.fileName)
             }
         }
 }
