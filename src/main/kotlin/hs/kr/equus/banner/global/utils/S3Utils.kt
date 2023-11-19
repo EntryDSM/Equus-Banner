@@ -3,6 +3,7 @@ package hs.kr.equus.banner.global.utils
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
+import hs.kr.equus.banner.domain.banner.presentation.request.BannerUploadRequest
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
 import hs.kr.equus.banner.global.exception.EmptyFileException
 import hs.kr.equus.banner.global.exception.ImageNotFoundException
@@ -30,7 +31,7 @@ class S3Utils(
         private val EXP_TIME = 1000 * 60 * 2
     }
 
-    fun upload(file: MultipartFile): String {
+    fun upload(file: MultipartFile): BannerUploadRequest {
         val ext = verificationFile(file)
 
         val randomName = UUID.randomUUID().toString()
@@ -52,26 +53,27 @@ class S3Utils(
             contentDisposition = "inline"
         }
 
+        val path = "photo/"
         inputStream.use {
             amazonS3.putObject(
-                PutObjectRequest(bucketName, filename, it, metadata)
+                PutObjectRequest(bucketName, path+filename, it, metadata)
                     .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
             )
         }
 
-        return generateObjectUrl(filename)
+        return BannerUploadRequest(url = generateObjectUrl(filename), fileName = filename)
     }
 
     fun generateObjectUrl(fileName: String): String {
-    val expiration = Date().apply {
-        time = time+ EXP_TIME.toLong()
-    }
-        val generatePresignedUrlRequest = GeneratePresignedUrlRequest(
-            bucketName, fileName
-        )
-            .withMethod(HttpMethod.GET)
-            .withExpiration(expiration)
-        return amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString()
+        val expiration = Date()
+        expiration.time += EXP_TIME
+
+        return amazonS3.generatePresignedUrl(
+            GeneratePresignedUrlRequest(
+                bucketName,
+                "photo/${fileName}"
+            ).withMethod(HttpMethod.GET).withExpiration(expiration)
+        ).toString()
     }
 
     private fun makeThumbnail(file: MultipartFile): BufferedImage {

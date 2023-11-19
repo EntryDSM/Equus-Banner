@@ -4,14 +4,13 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
 import org.springframework.data.redis.core.index.Indexed
 
-@RedisHash("banner")
+@RedisHash
 class BannerLink (
     @Id
     var id : Long? = null,
 
     @Indexed
     var fileName : String
-    
 ) {
     fun update(fileName: String): String {
         this.fileName = fileName
