@@ -14,7 +14,7 @@ class QueryBannerService(
     fun execute(): List<String> {
         val banner = bannerLinkRepository.findAll()
         return banner.map {
-            bannerLink -> s3Utils.generateObjectUrl(bannerLink.fileName)
+                bannerLink -> s3Utils.generateObjectUrl(bannerLink.fileName)
             }
         }
 }

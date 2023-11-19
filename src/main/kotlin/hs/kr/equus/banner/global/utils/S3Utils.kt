@@ -25,10 +25,11 @@ import javax.imageio.ImageIO
 class S3Utils(
     @Value("\${spring.cloud.aws.s3.bucket}")
     private val bucketName: String,
-    private val amazonS3: AmazonS3
+    private val amazonS3: AmazonS3,
 ) {
     companion object {
         private val EXP_TIME = 1000 * 60 * 2
+        const val path: String = "photo/"
     }
 
     fun upload(file: MultipartFile): UploadBannerRequest {
@@ -53,7 +54,6 @@ class S3Utils(
             contentDisposition = "inline"
         }
 
-        val path = "photo/"
         inputStream.use {
             amazonS3.putObject(
                 PutObjectRequest(bucketName, path+filename, it, metadata)
@@ -71,7 +71,7 @@ class S3Utils(
         return amazonS3.generatePresignedUrl(
             GeneratePresignedUrlRequest(
                 bucketName,
-                "photo/${fileName}"
+                "/${path}/${fileName}"
             ).withMethod(HttpMethod.GET).withExpiration(expiration)
         ).toString()
     }
