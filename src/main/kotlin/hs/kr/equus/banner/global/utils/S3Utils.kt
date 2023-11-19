@@ -3,7 +3,7 @@ package hs.kr.equus.banner.global.utils
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
-import hs.kr.equus.banner.domain.banner.presentation.request.BannerUploadRequest
+import hs.kr.equus.banner.domain.banner.presentation.request.UploadBannerRequest
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
 import hs.kr.equus.banner.global.exception.EmptyFileException
 import hs.kr.equus.banner.global.exception.ImageNotFoundException
@@ -31,7 +31,7 @@ class S3Utils(
         private val EXP_TIME = 1000 * 60 * 2
     }
 
-    fun upload(file: MultipartFile): BannerUploadRequest {
+    fun upload(file: MultipartFile): UploadBannerRequest {
         val ext = verificationFile(file)
 
         val randomName = UUID.randomUUID().toString()
@@ -61,7 +61,7 @@ class S3Utils(
             )
         }
 
-        return BannerUploadRequest(url = generateObjectUrl(filename), fileName = filename)
+        return UploadBannerRequest(url = generateObjectUrl(filename), fileName = filename)
     }
 
     fun generateObjectUrl(fileName: String): String {
