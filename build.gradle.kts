@@ -37,7 +37,6 @@ dependencies {
 	implementation(Dependencies.SPRING_SECURITY)
 
 	// Kotlin
-	implementation(Dependencies.JACKSON)
 	implementation(Dependencies.KOTLIN_REFLECT)
 
 	// Test
@@ -60,6 +59,8 @@ dependencies {
 	implementation(Dependencies.SCALR)
 
 	implementation(Dependencies.REDIS)
+
+	implementation(Dependencies.JSON)
 }
 
 tasks.withType<KotlinCompile> {
