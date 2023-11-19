@@ -65,8 +65,9 @@ class S3Utils(
     }
 
     fun generateObjectUrl(fileName: String): String {
-        val expiration = Date()
-        expiration.time += EXP_TIME
+        val expiration = Date().apply {
+            time += EXP_TIME
+        }
 
         return amazonS3.generatePresignedUrl(
             GeneratePresignedUrlRequest(
