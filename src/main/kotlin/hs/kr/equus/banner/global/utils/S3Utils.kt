@@ -18,15 +18,19 @@ import java.io.InputStream
 import java.util.*
 import javax.imageio.ImageIO
 
+
 @Component
 class S3Utils(
-    private val amazonS3: AmazonS3
+    @Value("\${spring.cloud.aws.s3.bucket}")
+    private val bucketName: String,
+    private val amazonS3: AmazonS3,
 ) {
     @Value("\${spring.cloud.aws.s3.bucket}")
     lateinit var bucketName: String
 
     companion object {
-        private const val EXP_TIME = 1000 * 60 * 2
+        const val EXP_TIME = 1000 * 60 * 2
+        const val PATH: String = "photo/"
     }
 
     fun upload(file: MultipartFile): String {
@@ -51,12 +55,31 @@ class S3Utils(
             contentDisposition = "inline"
         }
 
+        inputStream.use {
+            amazonS3.putObject(
+                PutObjectRequest(bucketName, "${PATH}${filename}", it, metadata)
+                    .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
+            )
+        }
         amazonS3.putObject(
             PutObjectRequest(bucketName, filename, inputStream, metadata)
                 .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
         )
 
         return filename
+    }
+
+    fun generateObjectUrl(fileName: String): String {
+        val expiration = Date().apply {
+            time += EXP_TIME
+        }
+
+        return amazonS3.generatePresignedUrl(
+            GeneratePresignedUrlRequest(
+                bucketName,
+                "${PATH}${fileName}"
+            ).withMethod(HttpMethod.GET).withExpiration(expiration)
+        ).toString()
     }
 
     private fun makeThumbnail(file: MultipartFile): BufferedImage {

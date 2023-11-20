@@ -1,8 +1,10 @@
 package hs.kr.equus.banner.domain.banner.presentation
 
 import hs.kr.equus.banner.domain.banner.service.CreateBannerLinkService
+import hs.kr.equus.banner.domain.banner.service.QueryBannerService
 import hs.kr.equus.banner.domain.banner.service.UpdateBannerLinkService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,7 +18,8 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 class BannerLinkController(
     private val createBannerLinkService: CreateBannerLinkService,
-    private val updateBannerLinkService: UpdateBannerLinkService
+    private val updateBannerLinkService: UpdateBannerLinkService,
+    private val queryBannerService: QueryBannerService
 ) {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -26,4 +29,7 @@ class BannerLinkController(
     @PatchMapping("/{banner-id}")
     fun updateBannerLink(@RequestPart(name = "photo") file: MultipartFile, @PathVariable("banner-id") bannerId: Long) =
         updateBannerLinkService.execute(file, bannerId)
+
+    @GetMapping
+    fun queryBannerLinkList() = queryBannerService.execute()
 }

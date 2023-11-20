@@ -13,8 +13,9 @@ class CreateBannerLinkService(
     private val s3Utils: S3Utils
 ) {
     @Transactional
-    fun execute(file: MultipartFile): String {
-        bannerLinkRepository.save(BannerLink(fileName = file.name))
-        return s3Utils.upload(file)
+    fun execute(file : MultipartFile): String {
+        val bannerLink = s3Utils.upload(file)
+        bannerLinkRepository.save(BannerLink(fileName = bannerLink))
+        return bannerLink
     }
 }

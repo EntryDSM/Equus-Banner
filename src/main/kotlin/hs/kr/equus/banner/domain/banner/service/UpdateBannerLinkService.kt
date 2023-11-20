@@ -14,8 +14,14 @@ class UpdateBannerLinkService(
 ) {
     @Transactional
     fun execute(file: MultipartFile, id: Long): String {
-        val bannerLink = bannerLinkRepository.findById(id).orElseThrow { BannerNotFoundException }
-        val fileName = s3Utils.upload(file)
-        return bannerLink.update(fileName)
+        val bannerLink = bannerLinkRepository.findById(id)
+            .orElseThrow { BannerNotFoundException }
+
+        val newFileName = s3Utils.upload(file)
+        bannerLink.update(newFileName)
+
+        bannerLinkRepository.save(bannerLink)
+        return newFileName
+
     }
 }

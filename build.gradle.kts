@@ -58,6 +58,9 @@ dependencies {
 
     implementation(Dependencies.SCALR)
 
+
+	  implementation(Dependencies.JSON)
+  
     implementation(Dependencies.REDIS)
 }
 
