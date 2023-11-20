@@ -20,7 +20,7 @@ class BannerLinkController(
 ) {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun createBannerLink(@RequestPart(name = "photo") file : MultipartFile) =
+    fun createBannerLink(@RequestPart(name = "photo") file: MultipartFile) =
         createBannerLinkService.execute(file)
 
     @PatchMapping("/{banner-id}")

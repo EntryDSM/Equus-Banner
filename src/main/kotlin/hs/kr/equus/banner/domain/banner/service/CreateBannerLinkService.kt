@@ -8,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service
-class CreateBannerLinkService (
+class CreateBannerLinkService(
     private val bannerLinkRepository: BannerLinkRepository,
     private val s3Utils: S3Utils
 ) {
     @Transactional
-    fun execute(file : MultipartFile): String {
+    fun execute(file: MultipartFile): String {
         bannerLinkRepository.save(BannerLink(fileName = file.name))
         return s3Utils.upload(file)
     }

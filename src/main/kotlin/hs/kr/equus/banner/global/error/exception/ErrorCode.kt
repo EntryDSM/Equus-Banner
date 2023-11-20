@@ -16,7 +16,7 @@ enum class ErrorCode(
     BANNER_NOT_FOUND(404, "Banner Not Found"),
     IMAGE_NOT_FOUND(404, "Image Not Found"),
 
-    //Bad Request
+    // Bad Request
     FILE_IS_EMPTY(400, "File does not exist"),
     BAD_FILE_EXTENSION(400, "File Extension is invalid")
 }

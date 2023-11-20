@@ -3,8 +3,8 @@ package hs.kr.equus.banner.global.error
 import com.fasterxml.jackson.databind.ObjectMapper
 import hs.kr.equus.banner.global.error.exception.EquusException
 import hs.kr.equus.banner.global.error.exception.ErrorCode
-import org.springframework.http.MediaType
 import io.sentry.Sentry
+import org.springframework.http.MediaType
 import org.springframework.web.filter.OncePerRequestFilter
 import java.io.IOException
 import java.nio.charset.StandardCharsets

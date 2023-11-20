@@ -1,6 +1,5 @@
 package hs.kr.equus.banner.global.utils
 
-import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
@@ -16,7 +15,6 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.net.URL
 import java.util.*
 import javax.imageio.ImageIO
 
@@ -44,7 +42,7 @@ class S3Utils(
             throw ImageNotFoundException
         }
 
-        val inputStream : InputStream = ByteArrayInputStream(os.toByteArray())
+        val inputStream: InputStream = ByteArrayInputStream(os.toByteArray())
 
         val metadata = ObjectMetadata().apply {
             contentType = MediaType.IMAGE_PNG_VALUE
@@ -54,7 +52,7 @@ class S3Utils(
 
         amazonS3.putObject(
             PutObjectRequest(bucketName, filename, inputStream, metadata)
-            .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
+                .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
         )
 
         return filename
