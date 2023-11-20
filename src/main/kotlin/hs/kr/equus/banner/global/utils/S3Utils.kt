@@ -20,10 +20,11 @@ import javax.imageio.ImageIO
 
 @Component
 class S3Utils(
-    @Value("\${spring.cloud.aws.s3.bucket}")
-    private val bucketName: String,
     private val amazonS3: AmazonS3
 ) {
+    @Value("\${spring.cloud.aws.s3.bucket}")
+    lateinit var bucketName: String
+
     companion object {
         private const val EXP_TIME = 1000 * 60 * 2
     }
