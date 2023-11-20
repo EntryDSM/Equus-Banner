@@ -16,7 +16,8 @@ class FilterConfig(
     override fun configure(builder: HttpSecurity) {
         builder.addFilterBefore(
             JwtFilter(),
-            UsernamePasswordAuthenticationFilter::class.java)
+            UsernamePasswordAuthenticationFilter::class.java
+        )
         builder.addFilterBefore(GlobalExceptionFilter(objectMapper), JwtFilter::class.java)
     }
 }

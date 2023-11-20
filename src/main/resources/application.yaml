@@ -6,7 +6,7 @@
       cloud:
         config:
           name: banner
-          profile: local-dokyung
+          profile: dev
 
       servlet:
         multipart:

@@ -9,5 +9,5 @@ import org.springframework.boot.runApplication
 class EquusBannerApplication
 
 fun main(args: Array<String>) {
-	runApplication<hs.kr.equus.banner.EquusBannerApplication>(*args)
+    runApplication<hs.kr.equus.banner.EquusBannerApplication>(*args)
 }

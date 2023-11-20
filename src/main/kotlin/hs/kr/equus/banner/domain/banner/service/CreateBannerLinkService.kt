@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service
-class CreateBannerLinkService (
+class CreateBannerLinkService(
     private val bannerLinkRepository: BannerLinkRepository,
     private val s3Utils: S3Utils
 ) {

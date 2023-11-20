@@ -1,7 +1,7 @@
 package hs.kr.equus.banner.global.config.security
 
-import hs.kr.equus.banner.global.config.filter.FilterConfig
 import com.fasterxml.jackson.databind.ObjectMapper
+import hs.kr.equus.banner.global.config.filter.FilterConfig
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -28,6 +28,8 @@ class SecurityConfig(
 
         http.authorizeRequests()
             .requestMatchers(CorsUtils::isCorsRequest)
+            .permitAll()
+            .antMatchers("/")
             .permitAll()
             .antMatchers("/banner/**")
             .hasRole(ADMIN_ROLE)

@@ -1,6 +1,5 @@
 package hs.kr.equus.banner.global.utils
 
-import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
@@ -26,6 +25,9 @@ class S3Utils(
     private val bucketName: String,
     private val amazonS3: AmazonS3,
 ) {
+    @Value("\${spring.cloud.aws.s3.bucket}")
+    lateinit var bucketName: String
+
     companion object {
         const val EXP_TIME = 1000 * 60 * 2
         const val PATH: String = "photo/"
@@ -45,7 +47,7 @@ class S3Utils(
             throw ImageNotFoundException
         }
 
-        val inputStream : InputStream = ByteArrayInputStream(os.toByteArray())
+        val inputStream: InputStream = ByteArrayInputStream(os.toByteArray())
 
         val metadata = ObjectMetadata().apply {
             contentType = MediaType.IMAGE_PNG_VALUE
@@ -59,6 +61,10 @@ class S3Utils(
                     .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
             )
         }
+        amazonS3.putObject(
+            PutObjectRequest(bucketName, filename, inputStream, metadata)
+                .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
+        )
 
         return filename
     }
