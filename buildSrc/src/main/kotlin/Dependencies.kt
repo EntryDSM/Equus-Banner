@@ -2,6 +2,8 @@ object Dependencies {
 
     // kotlin
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
+    const val JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin:${DependencyVersions.JACKSON_VERSION}"
+    const val JACKSON_TYPE = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${DependencyVersions.JACKSON_VERSION}"
 
     // web
     const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
