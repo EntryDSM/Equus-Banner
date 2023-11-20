@@ -29,6 +29,8 @@ class SecurityConfig(
         http.authorizeRequests()
             .requestMatchers(CorsUtils::isCorsRequest)
             .permitAll()
+            .antMatchers("/")
+            .permitAll()
             .antMatchers("/banner/**")
             .hasRole(ADMIN_ROLE)
             .antMatchers(HttpMethod.POST, "/banner/**")
