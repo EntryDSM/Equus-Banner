@@ -3,7 +3,6 @@ package hs.kr.equus.banner.global.utils
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
-import hs.kr.equus.banner.domain.banner.presentation.dto.request.UploadBannerRequest
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
 import hs.kr.equus.banner.global.exception.EmptyFileException
 import hs.kr.equus.banner.global.exception.ImageNotFoundException
@@ -32,7 +31,7 @@ class S3Utils(
         const val PATH: String = "photo/"
     }
 
-    fun upload(file: MultipartFile): UploadBannerRequest {
+    fun upload(file: MultipartFile): String {
         val ext = verificationFile(file)
 
         val randomName = UUID.randomUUID().toString()
@@ -56,12 +55,12 @@ class S3Utils(
 
         inputStream.use {
             amazonS3.putObject(
-                PutObjectRequest(bucketName, PATH+filename, it, metadata)
+                PutObjectRequest(bucketName, "${PATH}${filename}", it, metadata)
                     .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
             )
         }
 
-        return UploadBannerRequest(url = generateObjectUrl(filename), fileName = filename)
+        return filename
     }
 
     fun generateObjectUrl(fileName: String): String {
@@ -72,7 +71,7 @@ class S3Utils(
         return amazonS3.generatePresignedUrl(
             GeneratePresignedUrlRequest(
                 bucketName,
-                "/${PATH}/${fileName}"
+                "${PATH}${fileName}"
             ).withMethod(HttpMethod.GET).withExpiration(expiration)
         ).toString()
     }
