@@ -22,6 +22,5 @@ class UpdateBannerLinkService(
 
         bannerLinkRepository.save(bannerLink)
         return newFileName
-
     }
 }

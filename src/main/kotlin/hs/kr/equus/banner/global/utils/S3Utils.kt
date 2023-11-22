@@ -1,7 +1,11 @@
 package hs.kr.equus.banner.global.utils
 
+import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
-import com.amazonaws.services.s3.model.*
+import com.amazonaws.services.s3.model.CannedAccessControlList
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest
+import com.amazonaws.services.s3.model.ObjectMetadata
+import com.amazonaws.services.s3.model.PutObjectRequest
 import hs.kr.equus.banner.global.exception.BadFileExtensionException
 import hs.kr.equus.banner.global.exception.EmptyFileException
 import hs.kr.equus.banner.global.exception.ImageNotFoundException
@@ -18,12 +22,9 @@ import java.io.InputStream
 import java.util.*
 import javax.imageio.ImageIO
 
-
 @Component
 class S3Utils(
-    @Value("\${spring.cloud.aws.s3.bucket}")
-    private val bucketName: String,
-    private val amazonS3: AmazonS3,
+    private val amazonS3: AmazonS3
 ) {
     @Value("\${spring.cloud.aws.s3.bucket}")
     lateinit var bucketName: String
@@ -57,7 +58,7 @@ class S3Utils(
 
         inputStream.use {
             amazonS3.putObject(
-                PutObjectRequest(bucketName, "${PATH}${filename}", it, metadata)
+                PutObjectRequest(bucketName, "${PATH}$filename", it, metadata)
                     .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
             )
         }
@@ -77,7 +78,7 @@ class S3Utils(
         return amazonS3.generatePresignedUrl(
             GeneratePresignedUrlRequest(
                 bucketName,
-                "${PATH}${fileName}"
+                "${PATH}$fileName"
             ).withMethod(HttpMethod.GET).withExpiration(expiration)
         ).toString()
     }
