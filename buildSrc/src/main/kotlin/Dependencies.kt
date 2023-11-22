@@ -40,4 +40,7 @@ object Dependencies {
 
     //redis
     const val REDIS = "org.springframework.boot:spring-boot-starter-data-redis"
+
+    // Actuator
+    const val ACTUATOR = "org.springframework.boot:spring-boot-starter-actuator"
 }

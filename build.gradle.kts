@@ -62,6 +62,8 @@ dependencies {
     implementation(Dependencies.JSON)
 
     implementation(Dependencies.REDIS)
+
+    implementation(Dependencies.ACTUATOR)
 }
 
 tasks.withType<KotlinCompile> {
