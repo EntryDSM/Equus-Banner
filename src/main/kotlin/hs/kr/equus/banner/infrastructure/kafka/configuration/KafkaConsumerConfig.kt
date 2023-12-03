@@ -1,6 +1,5 @@
-package hs.kr.equus.banner.infrastructure.kafka.consumer
+package hs.kr.equus.banner.infrastructure.kafka.configuration
 
-import hs.kr.equus.banner.infrastructure.kafka.configuration.KafkaProperty
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.springframework.context.annotation.Bean
