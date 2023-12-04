@@ -62,10 +62,6 @@ class S3Utils(
                     .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
             )
         }
-        amazonS3.putObject(
-            PutObjectRequest(bucketName, filename, inputStream, metadata)
-                .withCannedAcl(CannedAccessControlList.AuthenticatedRead)
-        )
 
         return filename
     }
