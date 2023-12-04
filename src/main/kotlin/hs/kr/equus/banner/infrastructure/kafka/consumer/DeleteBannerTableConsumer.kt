@@ -14,7 +14,7 @@ class DeleteBannerTableConsumer(
         topics = [KafkaTopics.DELETE_ALL_TABLE],
         groupId = "delete-all-table-banner",
         containerFactory = "kafkaListenerContainerFactory"
-        )
+    )
     @Transactional
     fun execute() = bannerLinkRepository.deleteAll()
 }
