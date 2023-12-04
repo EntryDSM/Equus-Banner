@@ -64,6 +64,8 @@ dependencies {
     implementation(Dependencies.REDIS)
 
     implementation(Dependencies.ACTUATOR)
+
+    implementation(Dependencies.KAFKA)
 }
 
 tasks.withType<KotlinCompile> {
