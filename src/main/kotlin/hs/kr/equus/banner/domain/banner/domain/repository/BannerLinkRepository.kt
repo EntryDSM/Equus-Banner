@@ -1,8 +1,6 @@
 package hs.kr.equus.banner.domain.banner.domain.repository
 
 import hs.kr.equus.banner.domain.banner.domain.BannerLink
-import org.springframework.data.jpa.repository.JpaRepository
-import java.util.UUID
+import org.springframework.data.repository.CrudRepository
 
-interface BannerLinkRepository : JpaRepository<BannerLink, UUID> {
-}
+interface BannerLinkRepository : CrudRepository<BannerLink, Long>

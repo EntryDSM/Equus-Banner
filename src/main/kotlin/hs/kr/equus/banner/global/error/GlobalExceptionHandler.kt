@@ -1,6 +1,6 @@
 package hs.kr.equus.banner.global.error
 
-import hs.kr.equus.banner.banner.global.error.exception.EquusException
+import hs.kr.equus.banner.global.error.exception.EquusException
 import org.springframework.context.MessageSource
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

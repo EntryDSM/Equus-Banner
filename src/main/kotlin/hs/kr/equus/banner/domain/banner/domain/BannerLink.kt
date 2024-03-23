@@ -1,15 +1,20 @@
 package hs.kr.equus.banner.domain.banner.domain
 
-import hs.kr.equus.banner.domain.banner.BaseUUIDEntity
-import java.util.UUID
-import javax.persistence.Column
-import javax.persistence.Entity
+import org.springframework.data.annotation.Id
+import org.springframework.data.redis.core.RedisHash
+import org.springframework.data.redis.core.index.Indexed
 
-@Entity(name = "tbl_banner")
-class BannerLink (
-    id : UUID? = null,
+@RedisHash("bannerLink")
+class BannerLink(
+    @Id
+    var id: Long? = null,
 
-    @Column(name = "banner", nullable = false)
-    val link : String
-    
-) : BaseUUIDEntity(id)
+    @Indexed
+    var fileName: String
+
+) {
+    fun update(fileName: String): String {
+        this.fileName = fileName
+        return fileName
+    }
+}
