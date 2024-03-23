@@ -6,7 +6,7 @@ spring:
     cloud:
       config:
         name: banner
-        profile: dev
+        profile: ${BANNER_PROFILE}
 
     servlet:
       multipart:
